@@ -7,7 +7,10 @@ import expensesRoutes from "./modules/expenses/expenses.routes"
 const app = express()
 
 app.use(cors({
-    origin: "https://my-wallet-o0m0spui6-lucazgbrls-projects.vercel.app",
+    origin: [
+      "http://localhost:3000",
+      "https://my-wallet-o0m0spui6-lucazgbrls-projects.vercel.app",
+    ],
 }))
 app.use(express.json())
 

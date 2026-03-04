@@ -7,6 +7,18 @@ export async function register(req: Request, res: Response) {
 }
 
 export async function login(req: Request, res: Response) {
-  const data = await authService.login(req.body)
-  return res.json(data)
+  try {
+    const result = await authService.login(req.body);
+    return res.status(200).json(result);
+  } catch (error: any) {
+    if (error.message === "INVALID_CREDENTIALS") {
+      return res.status(401).json({
+        message: "Email or password is incorrect",
+      });
+    }
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 }

@@ -21,14 +21,14 @@ export async function login(data: any) {
     where: { email: data.email },
   })
 
-  if (!user) throw new Error("Invalid credentials")
+  if (!user) throw new Error("INVALID_CREDENTIALS")
 
   const passwordMatch = await bcrypt.compare(
     data.password,
     user.password
   )
 
-  if (!passwordMatch) throw new Error("Invalid credentials")
+  if (!passwordMatch) throw new Error("INVALID_CREDENTIALS")
 
   const token = generateToken({ userId: user.id })
 
