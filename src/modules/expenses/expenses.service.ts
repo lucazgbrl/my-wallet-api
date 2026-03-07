@@ -1,18 +1,11 @@
 import { prisma } from "@/lib/prisma"
 import { getExchangeRate } from "../currency.service"
+import { Prisma } from "@prisma/client"
 
-interface CreateExpenseInput {
-  value: number
-  currency: string
-  description: string
-  method: "cash" | "card" | "bank_transfer"
-  tag: string
-}
-
-export async function createExpense(userId: string, data: CreateExpenseInput) {
+export async function createExpense(userId: string, data: Prisma.ExpenseCreateInput) {
   const { value, currency, description, method, tag } = data
   const rate = await getExchangeRate(currency, "BRL")
-  const valueBRL = value * rate
+  const valueBRL = Number(value) * rate
 
   const expense = await prisma.expense.create({
     data: {
@@ -40,7 +33,7 @@ export async function getExpenses(userId: string) {
 export async function updateExpense(
   id: string,
   userId: string,
-  data: Partial<Omit<CreateExpenseInput, "userId">>
+  data: Prisma.ExpenseUpdateInput
 ) {
   const expense = await prisma.expense.findFirst({
     where: { id, userId },
