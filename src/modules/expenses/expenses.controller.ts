@@ -2,10 +2,10 @@ import { Request, Response } from "express"
 import * as expenseService from "./expenses.service"
 
 export async function create(req: Request, res: Response) {
-  const expense = await expenseService.createExpense({
-    ...req.body,
-    userId: req.user!.userId,
-  })
+  const expense = await expenseService.createExpense(
+    req.user!.userId,
+    req.body
+  )
 
   return res.status(201).json(expense)
 }

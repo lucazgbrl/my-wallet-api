@@ -1,10 +1,13 @@
+import { create } from "node:domain"
 import { z } from "zod"
 
 export const createExpenseSchema = z.object({
   body: z.object({
-    title: z.string().min(1),
-    amount: z.number().positive(),
-    type: z.enum(["income", "expense"]),
+    value: z.number().positive(),
+    currency: z.string().length(3).toUpperCase(),
+    description: z.string().min(1),
+    method: z.enum(["cash", "card", "bank_transfer"]),
+    tag: z.string().min(1),
   }),
 })
 

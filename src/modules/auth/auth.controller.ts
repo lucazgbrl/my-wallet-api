@@ -2,8 +2,13 @@ import { Request, Response } from "express"
 import * as authService from "./auth.service"
 
 export async function register(req: Request, res: Response) {
-  const user = await authService.register(req.body)
-  return res.status(201).json(user)
+  try {
+    const user = await authService.register(req.body)
+
+    return res.status(201).json(user)
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message })
+  }
 }
 
 export async function login(req: Request, res: Response) {
