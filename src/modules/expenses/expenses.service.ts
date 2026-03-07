@@ -9,7 +9,6 @@ export async function createExpense(userId: string, data: Prisma.ExpenseCreateIn
 
   const expense = await prisma.expense.create({
     data: {
-      userId,
       value,
       currency,
       exchangeRate: rate,
@@ -17,6 +16,7 @@ export async function createExpense(userId: string, data: Prisma.ExpenseCreateIn
       description,
       method,
       tag,
+      user: { connect: { id: userId } },
     },
   })
 
