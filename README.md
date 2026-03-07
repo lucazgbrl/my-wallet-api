@@ -8,13 +8,11 @@ controle de despesas.
 
 ## Tecnologias
 
--   Node.js
 -   Express
--   MySQL
--   TypeORM
+-   PostgreeSQL
+-   PrismaORM
 -   JWT
 -   Bcrypt
--   Docker
 
 ## Funcionalidades
 
@@ -22,11 +20,6 @@ controle de despesas.
 -   Login com autenticação JWT
 -   CRUD de transações financeiras
 -   Controle de despesas por usuário
-
-## Estrutura
-
-src/ - controllers - services - repositories - entities - middlewares -
-routes - database
 
 ## Instalação
 
@@ -42,27 +35,9 @@ Instale as dependências
 
 npm install
 
-Configure o arquivo `.env`
-
-DB_HOST= DB_PORT= DB_USER= DB_PASSWORD= DB_DATABASE= JWT_SECRET=
-
 Execute
 
 npm run dev
-
-## Endpoints principais
-
-Auth
-
-POST /auth/login\
-POST /auth/register
-
-Transactions
-
-GET /transactions\
-POST /transactions\
-PUT /transactions/:id\
-DELETE /transactions/:id
 
 ## Autor
 
